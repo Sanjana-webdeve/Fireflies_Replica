@@ -132,7 +132,7 @@ class Comment(Base):
     meeting_id: Mapped[int] = mapped_column(ForeignKey("meetings.id", ondelete="CASCADE"), index=True)
     segment_id: Mapped[Optional[int]] = mapped_column(
         ForeignKey("segments.id", ondelete="CASCADE"), nullable=True)
-    author: Mapped[str] = mapped_column(String(120), default="Alex Morgan")
+    author: Mapped[str] = mapped_column(String(120), default="Sanjana Raghunath")
     text: Mapped[str] = mapped_column(Text)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
     meeting: Mapped["Meeting"] = relationship(back_populates="comments")

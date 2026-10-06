@@ -44,8 +44,8 @@ export default function SettingsPage() {
           {tab === "profile" && (
             <div className="max-w-md space-y-4">
               <h2 className="font-semibold">Profile</h2>
-              <div><label className="label">Full name</label><input className="input" defaultValue="Alex Morgan" /></div>
-              <div><label className="label">Email</label><input className="input" defaultValue="alex.morgan@example.com" /></div>
+              <div><label className="label">Full name</label><input className="input" defaultValue="Sanjana Raghunath" /></div>
+              <div><label className="label">Email</label><input className="input" defaultValue="sanjrag05@gmail.com" /></div>
               <button className="btn btn-primary" onClick={() => toast("Profile saved (demo — no auth)")}>Save changes</button>
             </div>
           )}

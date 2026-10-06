@@ -176,8 +176,19 @@ SEEDS = [
 
 
 def ensure_user(db: Session) -> None:
-    if not db.get(User, DEFAULT_USER_ID):
-        db.add(User(id=DEFAULT_USER_ID, name="Alex Morgan", email="alex.morgan@example.com"))
+    user = db.get(User, DEFAULT_USER_ID)
+    if user is None:
+        db.add(User(id=DEFAULT_USER_ID, name="Sanjana Raghunath", email="sanjrag05@gmail.com"))
+        db.commit()
+        return
+    changed = False
+    if user.name == "Alex Morgan":
+        user.name = "Sanjana Raghunath"
+        changed = True
+    if user.email == "alex.morgan@example.com":
+        user.email = "sanjrag05@gmail.com"
+        changed = True
+    if changed:
         db.commit()
 
 

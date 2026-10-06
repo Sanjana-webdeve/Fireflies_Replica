@@ -47,12 +47,12 @@ export default function Topbar({ onMenu }: { onMenu: () => void }) {
         </div>
 
         <div className="relative">
-          <button onClick={() => { setProfile(!profile); setBell(false); }}><Avatar name="Alex Morgan" /></button>
+          <button onClick={() => { setProfile(!profile); setBell(false); }}><Avatar name="Sanjana Raghunath" /></button>
           {profile && (
             <div className="card absolute right-0 mt-2 w-56 p-1.5 text-sm shadow-xl">
               <div className="px-3 py-2">
-                <p className="font-semibold">Alex Morgan</p>
-                <p className="text-xs text-slate-500">alex.morgan@example.com</p>
+                <p className="font-semibold">Sanjana Raghunath</p>
+                <p className="text-xs text-slate-500">sanjrag05@gmail.com</p>
               </div>
               <button onClick={() => { setProfile(false); router.push("/settings"); }} className="btn-ghost flex w-full items-center gap-2 rounded-lg px-3 py-2"><Settings className="h-4 w-4" />Settings</button>
               <button onClick={() => { setProfile(false); toast("Authentication is disabled in this demo.", "info"); }} className="btn-ghost flex w-full items-center gap-2 rounded-lg px-3 py-2"><LogOut className="h-4 w-4" />Sign out</button>

@@ -8,7 +8,7 @@ AI summaries, action items, and more.
 ## Tech stack
 - **Frontend:** Next.js 14 (App Router) + TypeScript + Tailwind CSS + lucide-react
 - **Backend:** Python 3.11+, FastAPI, SQLAlchemy 2.0, Pydantic v2
-- **Database:** SQLite (auto-created and seeded on first start)
+- **Database:** SQLite locally; PostgreSQL for hosted deployments
 
 ## Setup
 ```bash
@@ -28,7 +28,7 @@ To enable Gemini 2.5 Flash for "Ask AI", copy `backend/.env.example` to `backend
 ```
 Next.js (UI)  ──REST/JSON──▶  FastAPI routers ──▶ services (parser, summarizer, qa, export)
                                    │                          │
-                                   └────── SQLAlchemy ORM ────┴──▶ SQLite
+                                   └────── SQLAlchemy ORM ────┴──▶ SQLite / PostgreSQL
 ```
 - **routers/** – thin HTTP layer (validation, status codes)
 - **services/** – business logic (transcript parsing, AI notes generation, Q&A, export); swappable for a real LLM
@@ -71,11 +71,12 @@ All child tables cascade on meeting delete; foreign keys are enforced (`PRAGMA f
 ## Assumptions
 - Transcription is out of scope; transcripts are seeded, pasted, or uploaded.
 - The player simulates playback with a timer (no audio file needed) so seek ⇄ transcript sync is fully demonstrable.
-- A default user (Alex Morgan) is always logged in.
+- A default user (Sanjana Raghunath) is always logged in.
 - Summaries are produced by an extractive heuristic summarizer; Ask AI uses an LLM only if an API key is provided.
 
 ## Deployment
 - **Backend (Render):** root `backend`, build `pip install -r requirements.txt`, start
-  `uvicorn app.main:app --host 0.0.0.0 --port $PORT`, env `CORS_ORIGINS=https://<your-vercel-domain>`.
-  (SQLite on free tiers is ephemeral; data re-seeds on restart.)
+  `uvicorn app.main:app --host 0.0.0.0 --port $PORT`, env `CORS_ORIGINS=https://<your-vercel-domain>` and
+  `DATABASE_URL=<your-managed-postgresql-url>`. The app creates the schema and seeds an empty database
+  on startup, but switching the URL does not migrate existing SQLite data; migrate it separately if needed.
 - **Frontend (Vercel):** root `frontend`, env `NEXT_PUBLIC_API_URL=https://<your-render-domain>`.
