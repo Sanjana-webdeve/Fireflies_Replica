@@ -71,7 +71,7 @@ All child tables cascade on meeting delete; foreign keys are enforced (`PRAGMA f
 ## Assumptions
 - Transcription is out of scope; transcripts are seeded, pasted, or uploaded.
 - The player simulates playback with a timer (no audio file needed) so seek ⇄ transcript sync is fully demonstrable.
-- A default user (Alex Morgan) is always logged in.
+- A default user (Sanjana Raghunath) is always logged in.
 - Summaries are produced by an extractive heuristic summarizer; Ask AI uses an LLM only if an API key is provided.
 
 ## Deployment
